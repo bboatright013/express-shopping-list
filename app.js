@@ -1,7 +1,7 @@
 const express = require('express');
 const ExpressError = require("./expressError");
-const items = require('items');
 const app = express();
+const items = require('./items');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -21,8 +21,10 @@ app.use(function (req, res, next) {
     let message = err.message;
   
     // set the status and alert the user
-    return res.status(status).json({
+    return res.json({
       error: {message, status}
     });
   });
   // end generic handler
+
+  module.exports = app;
